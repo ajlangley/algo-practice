@@ -8,7 +8,7 @@ int *find_max_subarray_recursive(int*, int, int);
 int *find_max_crossing_subarray(int*, int, int, int);
 int *find_max_sum(int*, int*, int*);
 int *generate_array(int, int);
-void calculate_recursive_advantage(int);
+void compare_run_times(int);
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
 
     srand(time(0));
 
-    calculate_recursive_advantage(MAX_ENTRY);
+    compare_run_times(MAX_ENTRY);
 
     return 0;
 }
@@ -86,7 +86,9 @@ int *find_max_crossing_subarray(int *arr, int left_index, int mid, int right_ind
         }
     }
 
-    return new int[3] {max_left, max_right, left_sum + right_sum};
+    int *result = new int[3] {max_left, max_right, left_sum + right_sum};
+
+    return result;
 }
 
 int *find_max_sum(int *left_result, int *right_result, int *cross_result)
@@ -111,7 +113,9 @@ int *find_max_sum(int *left_result, int *right_result, int *cross_result)
     delete [] right_result;
     delete [] cross_result;
 
-    return new int[3] {max_left, max_right, max_sum};
+    int *result = new int[3] {max_left, max_right, max_sum};
+
+    return result;
 }
 
 int *generate_array(int size, int max_entry)
@@ -126,7 +130,7 @@ int *generate_array(int size, int max_entry)
 
 // Return the problem size for which the recursive solution
 // outperforms the quadratic time one.
-void calculate_recursive_advantage(int max_entry)
+void compare_run_times(int max_entry)
 {
     int *arr, *result, n = 0, left_index, right_index, sum;
 
@@ -154,9 +158,6 @@ void calculate_recursive_advantage(int max_entry)
         delete [] arr;
         delete [] result;
 
-        printf("n: %d\tRecursive time:%d\tQuadratic time:%d\n", n, recursive_time, quad_time);
-
-        //if (recursive_time <= quad_time)
-         //   return n;
+        // printf("n: %d\tRecursive time:%lu\tQuadratic time:%lu\n", n, recursive_time, quad_time);
     }
 }
