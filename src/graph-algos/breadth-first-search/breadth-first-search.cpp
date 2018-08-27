@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include <map>
 #include <queue>
 #include "airport.h"
@@ -14,24 +15,37 @@ typedef std::map<std::string, Vertex<Airport*, std::string>*> Graph;
 typedef Vertex<Airport*, std::string> AirportVertex;
 typedef std::queue<AirportVertex*> AirportQueue;
 
+std::string get_filename(int, char*[]);
 void build_graph(std::string, Graph&);
 void destruct_graph(Graph&);
 void display_graph(Graph&);
 void breadth_first_search(Graph&, std::string, AirportQueue*&,
-    void (*visit)(AirportVertex*, int, AirportQueue*));
+void (*visit)(AirportVertex*, int, AirportQueue*));
 void visit(AirportVertex*, int, AirportQueue*);
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::string filename = "input-files/airports.csv";
+    std::string filename = get_filename(argc, argv);
     Graph graph;
     AirportQueue *output_queue;
 
     build_graph(filename, graph);
+    display_graph(graph);
     breadth_first_search(graph, graph.begin()->first, output_queue, visit);
     // destruct_graph(graph);
 
     return 0;
+}
+
+std::string get_filename(int argc, char *argv[])
+{
+    if (argc >= 3)
+        if (!strcmp(argv[1], "-i"))
+            return argv[2];
+
+    std::cerr << "You did not give a path for the input file. Exiting."
+        << std::endl;
+    exit(1);
 }
 
 void build_graph(std::string filename, Graph &graph)
