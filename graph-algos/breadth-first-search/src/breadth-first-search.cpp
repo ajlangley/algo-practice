@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
     build_graph(filename, graph);
     breadth_first_search(graph, graph.begin()->first, output_queue, visit);
-    // destruct_graph(graph);
+    destruct_graph(graph);
 
     return 0;
 }
@@ -84,6 +84,15 @@ void build_graph(std::string filename, Graph &graph)
     }
 
     infile.close();
+}
+
+void destruct_graph(Graph &graph)
+{
+    for (auto &vertex : graph)
+    {
+        delete vertex.second->get_item();
+        delete vertex.second;
+    }
 }
 
 void display_graph(Graph &graph)
