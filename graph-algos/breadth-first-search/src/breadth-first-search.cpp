@@ -30,7 +30,6 @@ int main(int argc, char *argv[])
     AirportQueue *output_queue;
 
     build_graph(filename, graph);
-    display_graph(graph);
     breadth_first_search(graph, graph.begin()->first, output_queue, visit);
     // destruct_graph(graph);
 
