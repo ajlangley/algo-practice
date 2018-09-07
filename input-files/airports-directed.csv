@@ -1,0 +1,12 @@
+city name, airport code, number of connections, (connected airports, distances)
+New York, lga, 1, (pek, 1)
+Beijing, pek, 2, (ord, 1), (bcn, 1)
+Los Angeles, lax, 1, (lga, 1)
+Chicago, ord, 1, (dia, 1)
+Denver, dia, 1, (ord, 1)
+Barcelona, bcn, 1, (cdg, 1)
+Paris, cdg, 1, (tng, 1)
+Tangier, tng, 1, (hnd, 1)
+Tokyo, hnd, 1, (bcn, 1)
+Buenos Aires, eze, 1, (bog, 1)
+Bogota, bog, 0
