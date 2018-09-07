@@ -4,8 +4,7 @@
 
 include("./../airportgraph.jl")
 
-function depthfirstsearch(graph::AirportGraph, start::String,
-    processnode)
+function depthfirstsearch(graph::AirportGraph, start::String, processnode)
     for vertex in values(graph)
         vertex.visited = false
     end
@@ -26,7 +25,7 @@ end
 
 function visit!(time::Array{Int32, 1}, vertex::Vertex{Airport}, processnode)
     time[1] += 1
-    vertex.discovery_time = time[1]
+    vertex.discoverytime = time[1]
     vertex.visited = true
     processnode(vertex)
 
@@ -36,6 +35,6 @@ function visit!(time::Array{Int32, 1}, vertex::Vertex{Airport}, processnode)
         end
     end
 
-    vertex.finishing_time = time[1]
+    vertex.finishingtime = time[1]
     time[1] += 1
 end

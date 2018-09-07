@@ -7,6 +7,7 @@ include("./graph.jl")
 include("./airport.jl")
 
 AirportGraph = Dict{String, Vertex{Airport}}
+AirportVertex = Vertex{Airport}
 
 function buildgraph(filename::String)
     graph = AirportGraph()
@@ -49,5 +50,15 @@ function readedges!(infile::IOStream, graph::AirportGraph)
             edge = Edge(graph[connection], weight)
             push!(vertex.connections, edge)
         end
+    end
+end
+
+function displaygraph(graph::AirportGraph)
+    for vertex in values(graph)
+        print(vertex.item.code)
+        for edge in vertex.connections
+            print(" ", edge.connection.item.code)
+        end
+        println("\n")
     end
 end
